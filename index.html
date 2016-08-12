@@ -4,40 +4,29 @@
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<title> PDF to Text </title>
+	<title> Image to Text </title>
 </head>
 
 <body>
 	<div class="container" id="page-container">
-		<h1 id="app-name"> <span class="glyphicon glyphicon-open-file"></span> PDF
+		<h1 id="app-name"> <span class="glyphicon glyphicon-open-file"></span> Image
 			<span class="glyphicon glyphicon-arrow-right"></span> Text
 		</h1>
 
-		<div class="jumbotron">
+		<div class="jumbotron" id="main-content">
 			<div>
 				<p id="app-name">
 					<span class="glyphicon glyphicon-eye-open"></span> The Technology
-					<br> This application uses Optical Character Recognition technology to detect words of a PDF file.
+					<br> This application uses Optical Character Recognition technology to detect words in an image file.
 					<br>It extracts the recognized words into a machine-readable character stream.
 				</p>
 				<a id="api-link" href="https://www.microsoft.com/cognitive-services/en-us/computer-vision-api" target="_blank">The API</a>
 				<br><br>
 
 				<label class="btn btn-primary btn-lg btn-block">
-					Upload a PDF file <input id="file-input" type="file" style="display: none;">
+					Upload an image file <input id="file-input" type="file" style="display: none;">
 				</label>
 				<br>
-				<div class="btn-group">
-					<button type="button" class="btn btn-default btn-lg btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">
-						<span id="b-text">Text (.txt) </span><span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" id="d-menu">
-						<li><a href="#">Text (.txt) </a></li>
-						<li class="disabled"><a href="#">Word (.docx) </a></li>
-					</ul>
-				</div>
-				<br><br>
 
 				<div class="btn-group">
 					<button type="button" class="btn btn-default btn-lg btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
@@ -67,7 +56,7 @@
 
 	<script src="./node_modules/jquery/dist/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-	<link href="css/styles.css" rel=stylesheet type="text/css">
+	<link href="css/css_styles.css" rel=stylesheet type="text/css">
 	<script src="js/javascript.js"></script>
 </body>
 
