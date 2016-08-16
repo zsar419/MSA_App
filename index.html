@@ -10,15 +10,22 @@
 <body>
 	<div class="container" id="page-container">
 		<h1 id="app-name"> <span class="glyphicon glyphicon-open-file"></span> Image
-			<span class="glyphicon glyphicon-arrow-right"></span> Text
+			<span class="glyphicon glyphicon-arrow-right"></span> Text Converter
 		</h1>
 
 		<div class="jumbotron" id="main-content">
 			<div>
-				<p id="app-name">
+				<p style="text-align: center" id="app-name">
 					<span class="glyphicon glyphicon-eye-open"></span> The Technology
 					<br> This application uses Optical Character Recognition technology to detect words in an image file.
-					<br>It extracts the recognized words into a machine-readable character stream.
+					<br>It extracts the recognized words into a machine-readable character stream and displays them on the webpage.
+				</p>
+				<p>Use cases:
+					<ul>
+						<li>Take a picture of a book and search through the text via PC</li>
+						<li>Convert quotes on images to text - FAST</li>
+						<li>Convert uncopyable PDF content to text content (via screenshot)</li>
+					</ul>
 				</p>
 				<a id="api-link" href="https://www.microsoft.com/cognitive-services/en-us/computer-vision-api" target="_blank">The API</a>
 				<br><br>
@@ -26,26 +33,34 @@
 				<label class="btn btn-primary btn-lg btn-block">
 					Upload an image file <input id="file-input" type="file" style="display: none;">
 				</label>
-				<br>
-
-				<div class="btn-group">
-					<button type="button" class="btn btn-default btn-lg btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">
-						<span id="b-text2">Language: English (en) </span><span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" id="d-menu2">
-						<li><a href="#">English (en) </a></li>
-						<li><a href="#">Japenese (jp) </a></li>
-					</ul>
-				</div>
+				<p2 id="fname" >File: [ none ]</p2>
 				<br><br>
-
 				<button id="convert-btn" type="button" class="btn btn-primary btn-lg btn-block">Convert</button>
 			</div>
 		</div>
 
-		<div class="jumbotron" id="txt-container" style="display: none">
+		<div class="jumbotron" id="txt-container" 
+		>
 			<h4 id="txt-content"></h4>
+			<div class="container" id="requirements" >
+				<h3>Requirements for OCR:</h3>
+				<p2>The size of the input image must be between 40 x 40 and 32000 x 32000 pixels.
+					<br>The image cannot be bigger than 100 megapixels.
+					<br>Input image can be rotated by any multiple of 90 degrees plus a small angle of up to ±40 degrees.
+					<br>The accuracy of text recognition depends on the quality of the image. An inaccurate reading may be caused by the following:
+				</p2>
+				<ul>
+					<li>Blurry images</li>
+					<li>Handwritten or cursive text</li>
+					<li>Artistic font styles</li>
+					<li>Small text size</li>
+					<li>Complex backgrounds, shadows or glare over text or perspective distortion</li>
+					<li>Oversized or missing capital letters at the beginnings of words</li>
+					<li>Subscript, superscript, or strikethrough text</li>
+				</ul>
+				<p2/>Limitations: On photos where text is dominant, false positives may come from partially recognized words. On some photos, especially photos without any text, precision can vary a lot depending on the type of image.
+			</div>
+		
 		</div>
 
 	</div>

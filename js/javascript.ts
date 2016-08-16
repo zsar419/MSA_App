@@ -1,44 +1,42 @@
 
-$("#d-menu li").click(function () { $("#b-text").text($(this).text()); });
-$("#d-menu2 li").click(function () { $("#b-text2").text("Language: " + $(this).text()); });
+var convertbtn = $("#convert-btn");
+var txtcontainer = $( "#txt-container" );
+var txtcontent = $( "#txt-content" );
+var requirements = $( "#requirements" )
 
-$("#convert-btn").on("click", function () {
-    processImage(function (file) { //this checks the extension and file
-        ajaxRequest(file, function (callbackData) { //here we send the API request and get the response
-            console.log(callbackData)
-            // Update UI - make method
-            $( "#txt-container" ).show();
-            $( "#txt-content" ).html(callbackData);
-            
-            
-        });
-    });
-
-    download(callbackData, "PDf_Text.txt", "file");
-    //var fileObject = retrieveFile();
-    //ajaxRequest();
+$('input[type=file]').change(function(e){
+  $("#fname").html("File: [ "+ $("#file-input").get(0).files[0].name + " ]");
 });
 
+convertbtn.on("click", function () {
+    $( "#requirements" ).hide();
+    processData(function (file) { //this checks the extension and file
+        txtcontainer.show();
+        txtcontent.html("... Processing ...");
+        //$( "#txt-content" ).html("Converting...");
+        sendAJAXRequest(file, function (callbackData) { //here we send the API request and get the response
+            console.log(callbackData)
+            txtcontent.html(callbackData); // Update UI - make method
+        });
+    });
+});
 
-function download(text, name, type) {
-  var a = $( "#txt-container" );
-  var file = new Blob([text], {type: type});
-  a.href = URL.createObjectURL(file);
-  a.download = name;
-}
-
-function processImage(callback) {
-    var file = $("#file-input").get(0).files[0]; //get(0) is required as imgSelector is a jQuery object so to get the DOM object, its the first item in the object. files[0] refers to the location of the photo we just chose.
+function processData(callback) : void{
+    var file = $("#file-input").get(0).files[0];
     var reader = new FileReader();
     if (file) reader.readAsDataURL(file); //used to read the contents of the file
-    else console.log("Invalid file");
+    else{
+        console.log("Invalid file");
+        requirements.show();
+    }
     reader.onloadend = function () {
-        if (!file.name.match(/\.(jpg|jpeg|png)$/)) pageheader.innerHTML = "Please upload an image file (jpg or png).";
-        else callback(file);
+        //if (!file.name.match(/\.(jpg|jpeg|png)$/)) $( "#requirements" ).show();
+        //else callback(file);
+        callback(file);
     };
 }
 
-function ajaxRequest(file, callback) {
+function sendAJAXRequest(file, callback) : void {
     console.log('sending request');
     $.ajax({
         url: "https://api.projectoxford.ai/vision/v1.0/ocr?",
@@ -54,7 +52,7 @@ function ajaxRequest(file, callback) {
         .done(function (data) {
             var retrievedText = '';
             var dataObject = $(data.regions[0].lines);
-            for (i = 0; i < dataObject.length; i++) {
+            for (var i = 0; i < dataObject.length; i++) {
                 $(dataObject[i].words).each(function (data) {
                     retrievedText += this.text + ' ';
                 });
